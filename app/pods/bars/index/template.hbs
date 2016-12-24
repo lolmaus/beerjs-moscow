@@ -1,0 +1,27 @@
+<h2>Bars</h2>
+
+{{#if session.isAuthenticated}}
+  {{link-to 'Add a bar' 'bars.new'}}
+{{/if}}
+
+<div>
+  {{#each (filter-by 'isNew' false model.bars) as |bar|}}
+    <p>
+      <span>
+        {{bar.name}}
+      </span>
+
+      <span>
+        {{bar.lat}}
+      </span>
+
+      <span>
+        {{bar.lng}}
+      </span>
+
+      {{#if session.isAuthenticated}}
+        <a href {{action 'remove' bar}}>×</a>
+      {{/if}}
+    </p>
+  {{/each}}
+</div>

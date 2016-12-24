@@ -1,4 +1,5 @@
 import Route from 'ember-route'
+import RSVP from 'rsvp'
 
 
 
@@ -21,11 +22,12 @@ export default Route.extend({
 
 
   // ----- Overridden Methods -----
-  beforeModel () {
-    return this
-      .get('session')
-      .fetch('firebase')
-      .catch(() => {})
+  model () {
+    const store = this.get('store')
+
+    return RSVP.hash({
+      bars: store.findAll('bar')
+    })
   },
 
 
@@ -43,17 +45,6 @@ export default Route.extend({
 
 
   // ----- Actions -----
-  actions: {
-    authenticate (provider) {
-      return this.get('session').open('firebase', {provider})
-    },
-
-    invalidateSession () {
-      return this.get('session').close('firebase')
-    },
-
-    accessDenied () {
-      this.transitionTo('bars')
-    }
-  }
+  // actions: {
+  // }
 })

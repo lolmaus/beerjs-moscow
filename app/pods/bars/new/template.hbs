@@ -1,0 +1,35 @@
+<h2>New bar</h2>
+
+{{link-to 'Back to the list' 'bars'}}
+
+<p>
+  Name
+  {{input value=changeset.name}}
+</p>
+
+
+<p>
+  Latitude
+  {{input value=changeset.lat type="number"}}
+</p>
+
+
+<p>
+  Longitude
+  {{input value=changeset.lng type="number"}}
+</p>
+
+
+<p>
+  <button
+    {{action 'save'}}
+  >
+    Save
+  </button>
+
+  <button
+    {{action 'reset'}}
+  >
+    Reset
+  </button>
+</p>
