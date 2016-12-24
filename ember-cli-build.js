@@ -15,6 +15,7 @@ module.exports = function (defaults) {
         'BJM_FIREBASE_DB_URL',
         'BJM_FIREBASE_STORAGE_BUCKET',
         'BJM_FIREBASE_SENDER_ID',
+        'BJM_ROOT_URL',
       ],
     },
   })
