@@ -1,5 +1,6 @@
 /* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app')
+const EmberApp    = require('ember-cli/lib/broccoli/ember-app')
+const environment = process.env.EMBER_ENV || 'development'
 
 module.exports = function (defaults) {
   var app = new EmberApp(defaults, {
@@ -17,6 +18,13 @@ module.exports = function (defaults) {
         'BJM_FIREBASE_SENDER_ID',
         'BJM_ROOT_URL',
       ],
+    },
+
+    favicons: {
+      faviconsConfig: {
+        // these options are passed directly to the favicons module
+        path: environment === 'production' ? process.env.BJM_ROOT_URL : '/',
+      }
     },
   })
 
