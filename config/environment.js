@@ -3,7 +3,7 @@ module.exports = function (environment) {
     modulePrefix: 'beerjs-moscow',
     podModulePrefix: 'beerjs-moscow/pods',
     environment: environment,
-    rootURL: process.env.BJM_ROOT_URL || '/',
+    rootURL: environment === 'production' ? process.env.BJM_ROOT_URL : '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
