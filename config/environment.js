@@ -1,6 +1,7 @@
 module.exports = function (environment) {
   var ENV = {
     modulePrefix: 'beerjs-moscow',
+    podModulePrefix: 'beerjs-moscow/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
@@ -18,7 +19,18 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    firebase: {
+      apiKey:        process.env.BJM_FIREBASE_API_KEY,
+      authDomain:    process.env.BJM_FIREBASE_AUTH_DOMAIN,
+      databaseURL:   process.env.BJM_FIREBASE_DB_URL,
+      storageBucket: process.env.BJM_FIREBASE_STORAGE_BUCKET,
+    },
+
+    torii: {
+      sessionServiceName: 'session',
+    },
   }
 
   if (environment === 'development') {

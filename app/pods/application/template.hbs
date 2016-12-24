@@ -1,0 +1,12 @@
+<h1>BeerJS Moscow</h1>
+
+{{#if session.isAuthenticated}}
+  Logged in as {{session.currentUser.displayName}}
+  <button {{action "invalidateSession"}}>Sign out</button>
+{{else}}
+  <button {{action "authenticate" "github"}}>Sign in with GitHub</button>
+{{/if}}
+
+<hr>
+
+{{outlet}}

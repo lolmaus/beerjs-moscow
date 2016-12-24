@@ -4,6 +4,17 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app')
 module.exports = function (defaults) {
   var app = new EmberApp(defaults, {
     // Add options here
+
+
+    dotEnv: {
+      clientAllowedKeys: [
+        'BJM_FIREBASE_API_KEY',
+        'BJM_FIREBASE_AUTH_DOMAIN',
+        'BJM_FIREBASE_DB_URL',
+        'BJM_FIREBASE_STORAGE_BUCKET',
+        'BJM_FIREBASE_SENDER_ID',
+      ],
+    },
   })
 
   // Use `app.import` to add additional libraries to the generated
