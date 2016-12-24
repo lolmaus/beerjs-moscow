@@ -4,7 +4,7 @@ module.exports = function (environment) {
     podModulePrefix: 'beerjs-moscow/pods',
     environment: environment,
     rootURL: environment === 'production' ? process.env.BJM_ROOT_URL : '/',
-    locationType: 'auto',
+    locationType: environment === 'production' ? 'hash' : 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
