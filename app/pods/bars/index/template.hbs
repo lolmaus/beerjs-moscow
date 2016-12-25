@@ -1,7 +1,7 @@
 <h2>Bars</h2>
 
 {{#if session.isAuthenticated}}
-  {{link-to 'Add a bar' 'bars.new'}}
+  {{link-to 'Add a bar' 'bars.bar' 'new'}}
 {{/if}}
 
 <div>
@@ -20,6 +20,7 @@
       </span>
 
       {{#if session.isAuthenticated}}
+        {{link-to 'edit' 'bars.bar' bar.id}}
         <a href {{action 'remove' bar}}>×</a>
       {{/if}}
     </p>

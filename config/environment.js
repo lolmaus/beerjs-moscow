@@ -31,6 +31,10 @@ module.exports = function (environment) {
     torii: {
       sessionServiceName: 'session',
     },
+
+    'ember-form-for': {
+      errorsPath: 'error.PROPERTY_NAME.validation',
+    },
   }
 
   if (environment === 'development') {

@@ -1,0 +1,15 @@
+{{#form-for
+  bar
+  submit = saveAction
+  reset  = resetAction
+  as |f|
+}}
+  {{f.text-field "name"}}
+  {{f.number-field "lat"}}
+  {{f.number-field "lng"}}
+
+  {{f.submit "Save"}}
+  {{f.reset  "Clear"}}
+{{/form-for}}
+
+{{bar.isInvalid}}

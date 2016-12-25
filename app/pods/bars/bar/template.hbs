@@ -1,0 +1,9 @@
+<h2>{{if isNew 'New' 'Edit'}} bar</h2>
+
+{{link-to 'Back to the list' 'bars'}}
+
+{{edit-bar
+  bar         = changeset
+  saveAction  = (action 'save')
+  resetAction = (action 'reset')
+}}

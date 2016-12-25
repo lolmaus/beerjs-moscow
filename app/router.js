@@ -8,8 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function () {
   this.route('bars', function () {
-    this.route('bar', {path: ':barId'})
-    this.authenticatedRoute('new')
+    this.authenticatedRoute('bar', {path: ':barId'})
   })
 
 

@@ -30,9 +30,9 @@ A community project aimed to supplement out Meetup.com group. The first mileston
   * :black_circle: Model
   * :black_circle: Create
   * :black_circle: Read
-  * :white_circle: Update
+  * :black_circle: Update
   * :black_circle: Delete
-  * :white_circle: Map via [ember-leaflet](http://www.ember-leaflet.com/)
+  * :radio_button: Map via [ember-leaflet](http://www.ember-leaflet.com/)
 
 * :white_circle:  Users
   * :white_circle: Model
@@ -55,7 +55,7 @@ A community project aimed to supplement out Meetup.com group. The first mileston
 
 ### Tech debt
 
-* :white_circle: Leverage [ember-changeset-validations](https://github.com/DockYard/ember-changeset-validations) or [ember-changeset-cp-validations](https://github.com/offirgolan/ember-changeset-cp-validations)
+* :black_circle: Leverage [ember-changeset-validations](https://github.com/DockYard/ember-changeset-validations) or [ember-changeset-cp-validations](https://github.com/offirgolan/ember-changeset-cp-validations)
 * :white_circle: Prevent from visiting routes that require authentication
 * :white_circle: uDifferentiate between environment and deploy target
 * :white_circle: Tweak FireBase permissions to prevent abuse
