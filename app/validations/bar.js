@@ -8,6 +8,10 @@ export default {
     validatePresence(true),
   ],
 
+  address: [
+    validatePresence(true),
+  ],
+
   lat: [
     validatePresence(true),
     validateNumber({ gte: -90, lte: 90, }),

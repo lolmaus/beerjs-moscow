@@ -36,6 +36,6 @@ module.exports = {
   },
 
   globals: {
-    // showdown: false,
+    ymaps: false,
   }
 }

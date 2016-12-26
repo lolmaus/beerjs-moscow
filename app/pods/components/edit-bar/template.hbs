@@ -5,11 +5,40 @@
   as |f|
 }}
   {{f.text-field "name"}}
+  {{f.text-field "address"}}
+
+  <div style="position: relative">
+    <button
+      {{action 'fillCoordsFromAddress'}}
+      disabled = {{not bar.address.length}}
+    >Fill coords from address</button>
+
+    {{#if foundAddresses}}
+      <ul style = "
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border: 1px solid black;
+        padding: 1rem;
+      ">
+        {{#each foundAddresses as |address|}}
+          <li>
+            <a
+              href
+              {{action 'fillCoords' (hash lat=address.lat lng=address.lng)}}
+            >
+              {{address.name}} ({{address.description}})
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+
   {{f.number-field "lat"}}
   {{f.number-field "lng"}}
 
   {{f.submit "Save"}}
   {{f.reset  "Clear"}}
 {{/form-for}}
-
-{{bar.isInvalid}}

@@ -4,7 +4,8 @@ import attr from 'ember-data/attr'
 
 
 export default Model.extend({
-  name: attr('string'),
-  lat:  attr('number'),
-  lng:  attr('number'),
+  name:    attr('string'),
+  address: attr('string'),
+  lat:     attr('number'),
+  lng:     attr('number'),
 })
