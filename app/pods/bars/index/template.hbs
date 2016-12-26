@@ -4,19 +4,46 @@
   {{link-to 'Add a bar' 'bars.bar' 'new'}}
 {{/if}}
 
+
+<div style="position: relative; height: 400px;">
+  {{#leaflet-map
+    bounds          = bounds
+    scrollWheelZoom = false
+    onClick         = (action 'closeAllPopups')
+  }}
+    {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+
+    {{#each existingBars as |bar|}}
+      {{#marker-layer location  = (array bar.lat bar.lng)}}
+        {{#popup-layer popupOpen = bar.popupOpen}}
+          <h3>{{bar.name}}</h3>
+          <p>{{bar.address}}</p>
+          <p>{{bar.description}}</p>
+
+          {{#if session.isAuthenticated}}
+            <p>
+              {{link-to 'Edit' 'bars.bar' bar.id}}
+              <a href {{action 'remove' bar}}>Delete</a>
+            </p>
+          {{/if}}
+        {{/popup-layer}}
+      {{/marker-layer}}
+    {{/each}}
+  {{/leaflet-map}}
+</div>
+
 <div>
-  {{#each (filter-by 'isNew' false model.bars) as |bar|}}
+  {{#each existingBars as |bar|}}
     <p>
-      <span>
+      <a
+        href
+        {{action 'centerMap' bar}}
+      >
         {{bar.name}}
-      </span>
+      </a>
 
       <span>
-        {{bar.lat}}
-      </span>
-
-      <span>
-        {{bar.lng}}
+        {{bar.address}}
       </span>
 
       {{#if session.isAuthenticated}}
