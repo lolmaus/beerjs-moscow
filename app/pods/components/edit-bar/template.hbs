@@ -7,38 +7,74 @@
   {{f.text-field "name"}}
   {{f.text-field "address"}}
 
+  {{f.number-field "lat"}}
+  {{f.number-field "lng"}}
+
   <div style="position: relative">
     <button
       {{action 'fillCoordsFromAddress'}}
       disabled = {{not bar.address.length}}
     >Fill coords from address</button>
 
+    <button
+      {{action 'fillAddressFromCoords'}}
+      disabled = {{or (not bar.lat) (not bar.lng)}}
+    >Fill address from coords</button>
+
     {{#if foundAddresses}}
-      <ul style = "
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: white;
-        border: 1px solid black;
-        padding: 1rem;
-      ">
-        {{#each foundAddresses as |address|}}
-          <li>
-            <a
-              href
-              {{action 'fillCoords' (hash lat=address.lat lng=address.lng)}}
-            >
-              {{address.name}} ({{address.description}})
-            </a>
-          </li>
-        {{/each}}
-      </ul>
+      {{#click-outside action = (action 'closeAddresses')}}
+        <a
+          href
+          {{action 'closeAddresses'}}
+          style="text-align: right;"
+        >
+          ×
+        </a>
+
+        <ul style = "
+          position:         absolute;
+          top:              100%;
+          left:             0;
+          background-color: white;
+          border:           1px solid black;
+          padding:          1rem;
+          max-height:       70vh;
+          overflow-x:       auto;
+          z-index:          100000;
+        ">
+          {{#each foundAddresses as |address|}}
+            <li>
+              <a
+                href
+                {{action 'fillCoords' (hash lat=address.lat lng=address.lng)}}
+              >
+                {{address.name}} ({{address.description}})
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      {{/click-outside}}
     {{/if}}
   </div>
-
-  {{f.number-field "lat"}}
-  {{f.number-field "lng"}}
 
   {{f.submit "Save"}}
   {{f.reset  "Clear"}}
 {{/form-for}}
+
+<div style="position: relative; height: 400px;">
+  {{#leaflet-map
+    center  = (array (or mapCenterLat 55.755826) (or mapCenterLng 37.6173))
+    zoom    = 12
+    onClick = (action 'fillCoordsFromMap')
+  }}
+    {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+
+    {{#if (and bar.lat bar.lng)}}
+      {{marker-layer
+        location   = (array bar.lat bar.lng)
+        draggable = true
+        onDrag    = (action 'fillCoordsFromMap')
+      }}
+    {{/if}}
+  {{/leaflet-map}}
+</div>

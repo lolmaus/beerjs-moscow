@@ -1,5 +1,6 @@
 import Component from 'ember-component'
 import service from 'ember-service/inject'
+import computed from 'ember-computed-decorators'
 
 
 
@@ -24,6 +25,12 @@ export default Component.extend({
 
   // ----- Static properties -----
   foundAddresses: null,
+
+  @computed
+  mapCenterLat () { return this.get('bar.lat') },
+
+  @computed
+  mapCenterLng () { return this.get('bar.lng') },
 
 
 
@@ -66,15 +73,38 @@ export default Component.extend({
       yandexMaps
         .find(address)
         .then(foundAddresses => {
-          console.log({foundAddresses})
 
           if (foundAddresses.length === 1) {
-            this.send('fillCoords', foundAddresses[0])
+            const {lat, lng} = foundAddresses[0]
+            this.send('fillCoords', {lat, lng})
+            this.setProperties({mapCenterLat: lat, mapCenterLng: lng})
             return
           }
 
           this.setProperties({foundAddresses})
         })
+    },
+
+    fillCoordsFromMap ({latlng: {lat, lng}}) {
+      this.send('fillCoords', {lat, lng})
+    },
+
+    fillAddressFromCoords () {
+      const bar = this.get('bar')
+      const lat = bar.get('lat')
+      const lng = bar.get('lng')
+
+      this
+        .get('yandexMaps')
+        .find([lat, lng])
+        .then(result => {
+          if (!result || !result.length) return
+          bar.set('address', result[0].name)
+        })
+    },
+
+    closeAddresses () {
+      this.set('foundAddresses', null)
     }
   }
 })

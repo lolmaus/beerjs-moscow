@@ -4,7 +4,16 @@ const environment = process.env.EMBER_ENV || 'development'
 
 module.exports = function (defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+    fingerprint: {
+      exclude: [
+        'images/layers-2x.png',
+        'images/layers.png',
+        'images/marker-icon-2x.png',
+        'images/marker-icon.png',
+        'images/marker-shadow.png'
+      ]
+    },
+
     babel: {
       optional: ['es7.decorators']
     },
@@ -40,6 +49,10 @@ module.exports = function (defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+
+  // app.import('bower_components/yandex-maps/index.1', {
+  //   outputFile: 'assets/vendor.js'
+  // })
 
   return app.toTree()
 }
