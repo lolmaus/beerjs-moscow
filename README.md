@@ -8,11 +8,12 @@ A community project aimed to supplement out Meetup.com group. The first mileston
 > #### Legend
 >
 > :white_circle: -- not implemented yet, planned  
-> :white_circle::grey_question: -- WTF is that even? Not counted as a missing feature  
+> :white_circle::grey_question: -- planned but ot sure how to implement  
 > :radio_button: -- in progress (leaf) or partially implemented (branch)  
 > :black_circle: -- implemented  
 > :black_circle::grey_question: -- implemented but some edge cases might be missing  
 > :no_entry: -- won't implement, not counted as a missing feature  
+
 
 ### Project structure
 
@@ -21,8 +22,11 @@ A community project aimed to supplement out Meetup.com group. The first mileston
 * :black_circle: Deployment
 * :black_circle: Favicon
 * :white_circle: Internationalization via [ember-intl](https://github.com/jasonmit/ember-intl)
-* :white_circle: Pick an addon for forms
+* :black_circle: Pick an addon for forms
 * :white_circle: Material design via [ember-paper](https://miguelcobain.github.io/ember-paper/)
+* :white_circle: Analytics
+* :white_circle::grey_question: Some kind of abuse prevention
+
 
 ### Main app parts
 
@@ -32,7 +36,8 @@ A community project aimed to supplement out Meetup.com group. The first mileston
   * :black_circle: Read
   * :black_circle: Update
   * :black_circle: Delete
-  * :radio_button: Map via [ember-leaflet](http://www.ember-leaflet.com/)
+  * :black_circle: Map via [ember-leaflet](http://www.ember-leaflet.com/)
+  * :white_circle: Search by name
 
 * :white_circle:  Users
   * :white_circle: Model
@@ -59,6 +64,7 @@ A community project aimed to supplement out Meetup.com group. The first mileston
 * :white_circle: Prevent from visiting routes that require authentication
 * :white_circle: uDifferentiate between environment and deploy target
 * :white_circle: Tweak FireBase permissions to prevent abuse
+* :white_circle: Leverage `ember-concurrency` for async actions, with button statuses
 
 
 ### Tests
@@ -66,6 +72,7 @@ A community project aimed to supplement out Meetup.com group. The first mileston
 * :white_circle: Add Chai via [ember-cli-chai](https://github.com/ember-cli/ember-cli-chai)
 * :white_circle: Add Page Object via [ember-cli-page-object](http://ember-cli-page-object.js.org/)
 * :white_circle: User acceptance tests
+
 
 ### Organizational
 
