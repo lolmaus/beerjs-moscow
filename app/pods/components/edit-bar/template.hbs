@@ -5,6 +5,12 @@
   as |f|
 }}
   {{f.text-field "name"}}
+
+  <button
+    {{action 'fillAddressAndCoordsFromName'}}
+    disabled = {{not bar.name.length}}
+  >Fill address and coords from bar name (Google)</button>
+
   {{f.text-field "address"}}
 
   {{f.number-field "lat"}}
@@ -14,12 +20,12 @@
     <button
       {{action 'fillCoordsFromAddress'}}
       disabled = {{not bar.address.length}}
-    >Fill coords from address</button>
+    >Fill coords from address (Yandex)</button>
 
     <button
       {{action 'fillAddressFromCoords'}}
       disabled = {{or (not bar.lat) (not bar.lng)}}
-    >Fill address from coords</button>
+    >Fill address from coords (Yandex)</button>
 
     {{#if foundAddresses}}
       {{#click-outside action = (action 'closeAddresses')}}
@@ -46,9 +52,9 @@
             <li>
               <a
                 href
-                {{action 'fillCoords' (hash lat=address.lat lng=address.lng)}}
+                {{action 'fillCoordsAndAddress' address}}
               >
-                {{address.name}} ({{address.description}})
+                {{address.name}} ({{address.address}})
               </a>
             </li>
           {{/each}}

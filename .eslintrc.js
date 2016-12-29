@@ -36,6 +36,7 @@ module.exports = {
   },
 
   globals: {
+    google: false,
     ymaps: false,
     L: false
   }

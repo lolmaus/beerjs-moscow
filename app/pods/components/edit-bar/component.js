@@ -15,6 +15,7 @@ export default Component.extend({
 
   // ----- Services -----
   yandexMaps: service(),
+  googleMaps: service(),
 
 
 
@@ -24,7 +25,7 @@ export default Component.extend({
 
 
   // ----- Static properties -----
-  foundAddresses: null,
+  foundAddresses:     null,
 
   @computed
   mapCenterLat () { return this.get('bar.lat') },
@@ -43,6 +44,14 @@ export default Component.extend({
 
 
   // ----- Custom Methods -----
+  _applyFoundAddresses (foundAddresses) {
+    if (foundAddresses.length === 1) {
+      this.send('fillCoordsAndAddress', foundAddresses[0])
+      return
+    }
+
+    this.setProperties({foundAddresses})
+  },
 
 
 
@@ -56,10 +65,16 @@ export default Component.extend({
 
   // ----- Actions -----
   actions: {
-    fillCoords ({lat, lng}) {
-      this
-        .get('bar')
-        .setProperties({lat, lng})
+    fillCoordsAndAddress ({name, lat, lng, address, useAddress = true}) {
+      const bar = this.get('bar')
+
+      if (lat && lng) {
+        bar.setProperties({lat, lng})
+        this.setProperties({mapCenterLat: lat, mapCenterLng: lng})
+      }
+
+      if (address && useAddress) bar.setProperties({address})
+      if (name)                  bar.setProperties({name})
 
       this.set('foundAddresses', null)
     },
@@ -71,22 +86,12 @@ export default Component.extend({
       const yandexMaps = this.get('yandexMaps')
 
       yandexMaps
-        .find(address)
-        .then(foundAddresses => {
-
-          if (foundAddresses.length === 1) {
-            const {lat, lng} = foundAddresses[0]
-            this.send('fillCoords', {lat, lng})
-            this.setProperties({mapCenterLat: lat, mapCenterLng: lng})
-            return
-          }
-
-          this.setProperties({foundAddresses})
-        })
+        .find(address, false)
+        .then(foundAddresses => this._applyFoundAddresses(foundAddresses))
     },
 
     fillCoordsFromMap ({latlng: {lat, lng}}) {
-      this.send('fillCoords', {lat, lng})
+      this.send('fillCoordsAndAddress', {lat, lng})
     },
 
     fillAddressFromCoords () {
@@ -105,6 +110,15 @@ export default Component.extend({
 
     closeAddresses () {
       this.set('foundAddresses', null)
+    },
+
+    fillAddressAndCoordsFromName () {
+      const name = this.get('bar.name')
+
+      this
+        .get('googleMaps')
+        .findBar(name)
+        .then(foundAddresses => this._applyFoundAddresses(foundAddresses))
     }
   }
 })

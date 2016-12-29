@@ -26,7 +26,7 @@ export default Service.extend({
 
 
   // ----- Custom Methods -----
-  find (input) {
+  find (input, useAddress = true) {
     return this
       ._wrapInRSVP(ymaps.geocode(input, {
         boundedBy: [[56.061303, 37.033539], [55.452384, 38.162384]], // Moscow
@@ -41,24 +41,25 @@ export default Service.extend({
           .map(({GeoObject}) => {
             const {
               name,
-              description,
+              description: address,
               Point: {pos},
-              boundedBy: {Envelope: {lowerCorner, upperCorner}}
+              // boundedBy: {Envelope: {lowerCorner, upperCorner}}
             } = GeoObject
 
-            const [lng, lat]           = pos        .split(" ").map(item => parseFloat(item, 10))
-            const [lowerLng, lowerLat] = lowerCorner.split(" ").map(item => parseFloat(item, 10))
-            const [upperLng, upperLat] = upperCorner.split(" ").map(item => parseFloat(item, 10))
+            const [lng, lat] = pos.split(" ").map(item => parseFloat(item, 10))
+            // const [lowerLng, lowerLat] = lowerCorner.split(" ").map(item => parseFloat(item, 10))
+            // const [upperLng, upperLat] = upperCorner.split(" ").map(item => parseFloat(item, 10))
 
             return {
               name,
-              description,
+              address,
               lat,
               lng,
-              lowerLat,
-              lowerLng,
-              upperLat,
-              upperLng,
+              useAddress
+              // lowerLat,
+              // lowerLng,
+              // upperLat,
+              // upperLng,
             }
           })
       )

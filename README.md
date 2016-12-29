@@ -37,7 +37,8 @@ A community project aimed to supplement out Meetup.com group. The first mileston
   * :black_circle: Update
   * :black_circle: Delete
   * :black_circle: Map via [ember-leaflet](http://www.ember-leaflet.com/)
-  * :white_circle: Search by name
+  * :black_circle: Search by name
+  * :white_circle: Show map when searching by name
 
 * :white_circle:  Users
   * :white_circle: Model
